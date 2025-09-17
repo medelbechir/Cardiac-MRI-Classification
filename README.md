@@ -1,17 +1,24 @@
 # Cardiac MRI Classification — Kaggle (1st place)
 
-Classification of heart diseases from cardiac MRIs using anatomical feature engineering and stacked machine-learning models.
+Solution to the **IMA205 Kaggle Challenge**: classification of cardiac pathologies from MRI scans and partial segmentations.
 
-## Methods
-- Feature engineering from segmented MRIs (volume, ejection fraction, ratios…)
-- Models: Random Forest, XGBoost, Multi-Layer Perceptron
-- Hyperparameter optimization with Optuna
+## Highlights
+- 🏆 **1st place** on the private leaderboard — 49/50 correct predictions
+- Complete end-to-end pipeline: LV reconstruction → feature engineering → stacked ML models
+
+## Pipeline
+1. **Left Ventricle Reconstruction** (`notebooks/VG_Reconstruction.ipynb`)
+   - Compared UNet2D, active contours and **morphological filling** (Dice ≈ 0.99).
+2. **Feature Engineering** (`notebooks/Feature_Model_Testing.ipynb`)
+   - 34 anatomical & functional features: volumes, ejection fractions, myocardial thickness, contraction dynamics.
+3. **Classification** (`notebooks/Final_Pipeline.ipynb`)
+   - Random Forest baseline → specialized Gradient Boosting & XGBoost for fine discrimination of classes 1 & 2.
+   - Dynamic aggregation of predictions for optimal accuracy.
 
 ## Results
-- 🥇 **1st place** on the Kaggle private leaderboard
+| Phase        | Model                    | Accuracy |
+|--------------|---------------------------|----------|
+| Baseline     | Random Forest (34 feats)  | 95%      |
+| Final        | RF + GB + XGBoost         | **98%**  |
 
-## Quick start
-```bash
-git clone https://github.com/medelbechir/Cardiac-MRI-Classification.git
-cd Cardiac-MRI-Classification
-pip install -r requirements.txt
+## Repository structure
